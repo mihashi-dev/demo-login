@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー管理</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>ユーザー管理</h2>
+
+        <!-- 登録 -->
+        <div class="section">
+            <h3>登録</h3>
+
+            <input id="name" placeholder="名前">
+            <input id="email" type="email" placeholder="メール">
+            <input id="password" type="password" placeholder="パスワード">
+
+            <button onclick="create()">登録</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 検索 -->
+        <div class="section">
+            <h3>検索</h3>
+
+            <input id="searchName" placeholder="名前で検索">
+            <button onclick="search()">検索</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 一覧 -->
+        <div class="section">
+            <h3>一覧</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名前</th>
+                        <th>メール</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="link">
+            <a href="/logout">ログアウト</a>
+        </p>
+
+    </div>
+
+    <script>
+        const API = "http://localhost:8080/api/users";
+
+        /**
+         * ユーザー一覧取得・検索処理
+         */
+        function search() {
+            const name = document.getElementById("searchName").value;
+            let url = API;
+
+            if (name) {
+                url += "?name=" + name;
+            }
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => show(data));
+        }
+
+        /**
+         * 一覧表示処理（TABLE用）
+         */
+        function show(data) {
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+
+            data.forEach(u => {
+                list.innerHTML += `
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>
+                        <button onclick="edit(${u.id})">編集</button>
+                        <button onclick="removeUser(${u.id})">削除</button>
+                    </td>
+                </tr>`;
+            });
+        }
+
+        /**
+         * ユーザー登録処理
+         */
+        function create() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (!name || !email || !password) {
+                alert("すべて入力してください");
+                return;
+            }
+
+            fetch(API, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            }).then(() => search());
+        }
+
+        /**
+         * ユーザー更新処理
+         */
+        function edit(id) {
+            const name = prompt("新しい名前を入力");
+            const email = prompt("新しいメールアドレスを入力");
+
+            if (!name || !email) return;
+
+            fetch(API + "/" + id, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            }).then(() => search());
+        }
+
+        /**
+         * ユーザー削除処理
+         */
+        function removeUser(id) {
+            if (!confirm("削除しますか？")) return;
+
+            fetch(API + "/" + id, {
+                method: "DELETE"
+            }).then(() => search());
+        }
+
+        // 初期表示
+        search();
+    </script>
+
+</body>
+
+</html>

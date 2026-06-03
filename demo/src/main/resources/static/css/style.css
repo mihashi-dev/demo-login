@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+}
+
+/* 外枠 */
+.container {
+    width: 350px;
+    margin: 60px auto;
+    padding: 20px 26px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* タイトル */
+h2 {
+    font-weight: 400;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* checkboxの崩れ防止 */
+.checkbox {
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+/* 入力 */
+input {
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 14px;
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* フォーカス時 */
+input:focus {
+    border-color: #e77600;
+    outline: none;
+    box-shadow: 0 0 3px #e77600;
+}
+
+/* ボタン（Amazon風） */
+button {
+    width: 100%;
+    padding: 8px;
+    background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+    border: 1px solid #a88734;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #f5d78e, #eeb933);
+}
+
+/* リンク */
+.link {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+a {
+    color: #0066c0;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #fafafa;
+}
+
+/* ボタン小さく（重要） */
+td button {
+    width: auto;
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/* 下の区切り線 */
+.divider {
+    margin: 20px 0;
+    border-top: 1px solid #e7e7e7;
+}

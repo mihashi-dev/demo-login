@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>ログイン</h2>
+
+        <form method="post" action="/login">
+
+            <!-- メールアドレス入力 -->
+            <input name="username" type="email" placeholder="メール">
+
+            <!-- パスワード入力 -->
+            <input name="password" type="password" placeholder="パスワード">
+
+            <!-- ログイン状態保持 -->
+            <label class="checkbox">
+                <input type="checkbox" name="remember-me"> ログイン状態を保持
+            </label>
+
+            <button type="submit">ログイン</button>
+
+        </form>
+
+        <div class="divider"></div>
+
+        <p class="link">
+            <a href="/register">アカウント作成はこちら</a>
+        </p>
+
+    </div>
+
+</body>
+
+</html>

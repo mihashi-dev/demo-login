@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>アカウント作成</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>アカウント作成</h2>
+
+        <!-- 名前入力 -->
+        <input id="name" placeholder="名前">
+
+        <!-- メール入力 -->
+        <input id="email" type="email" placeholder="メール">
+
+        <!-- パスワード入力 -->
+        <input id="password" type="password" placeholder="パスワード">
+
+        <button onclick="register()">アカウント作成</button>
+
+        <div class="divider"></div>
+
+        <p class="link">
+            <a href="/login">ログインへ</a>
+        </p>
+
+    </div>
+
+    <script>
+        /**
+         * ユーザー登録処理
+         */
+        function register() {
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // 入力チェック
+            if (!name || !email || !password) {
+                alert("すべて入力してください");
+                return;
+            }
+
+            fetch("http://localhost:8080/api/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password })
+            })
+            .then(res => {
+                if (res.ok) {
+                    alert("登録成功");
+                    location.href = "/login";
+                } else {
+                    alert("登録失敗");
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
